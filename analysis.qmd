@@ -6,7 +6,7 @@ execute:
   echo: false
 ---
 
-```{r}
+```{r, message= FALSE}
 #| message: false
 #| label: setup
 library(tidyverse)
@@ -14,7 +14,8 @@ library(scales)
 ```
 ```{r}
 #| warning: false
-nyc_tracts<-read_csv(file="./mass-tracts.csv")
+#| label: graph
+nyc_tracts<-read_csv(file="./mass-tracts.csv",show_col_types= FALSE)
 # Create the density plot
 nyc_tracts|>
   drop_na()|>
@@ -24,6 +25,7 @@ nyc_tracts|>
                size=0.2,
                bw=20000) +
     scale_x_continuous(labels = dollar_format()) +
+    #scale_y_continuous(limits = c())+
     scale_fill_manual(values = c("Hispanic" = "#F8766D", 
                                "Black" = "#7CAE00", 
                                "Asian" = "#00BFC4", 
@@ -42,8 +44,9 @@ nyc_tracts|>
       #plot.subtitle = element_text(size = 14),
       #plot.caption = element_text(size = 10),
       #legend.position = "right"
-      axis.ticks.y = element_blank(),
-      axis.text.y = element_blank())
+      #axis.ticks.y = element_blank(),
+      #axis.text.y = element_blank()
+      )
     
     
 ```
